@@ -26,4 +26,9 @@ public class Main
   {
     // code solution here
   }
+
+  public static void multTable()
+  {
+    // code solution here
+  }
 }
