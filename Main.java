@@ -4,21 +4,26 @@ public class Main
 {
   public static void main(String[] args)
   {
-    // Put your solutions below
+    // Make sure to test your methods here
   }
 
-  public static int countSub(String word, String target)
+  public static void printNTimes(String word, int N)
   {
-    return 0;
+    // code solution here
   }
 
-  public static int countProperContains(String word, String target)
+  public static void printNums()
   {
-    return 0;
+    // code solution here
   }
 
-  public static String deleteSub(String word, String target)
+  public static void uprightNumberTriangle(int N)
   {
-    return null;
+    // code solution here
+  }
+
+  public static void starTree()
+  {
+    // code solution here
   }
 }
