@@ -1,4 +1,4 @@
-# unit-4-4-assignment-b
+# unit-4-5-assignment
 
 ## Git Config
 ```
@@ -20,133 +20,130 @@ java Main.java
 
 After you compile the shape classes, you only need to compile and run `Main.java` as usual.
 
-# Problem 0
-To help you with Problem 3, it might be useful to refamiliraize yourself with the "find and remove" algorithm.  Write a program which takes in two strings, a `sentence` and a `target`, and removes the `target` from the `sentence` (if the target exists).
+# Problem 1 - PrintNTimes
 
-The general steps are:
-1. Determine if the `target` is in the `sentence` (use `indexOf()`)
-2. If it is in the `sentence`, then get a substring of everything before the `target`
-3. Get a substring of everything after the `target`
-4. Combine the "before" and "after" substrings
+Write code that takes a user input of a String and an integer. The code should print each letter of the String the n number of times, where n is the integer input from the user.
 
-# Problem 1 - CountSub
-Write a program which takes in two Strings `word` and `target` and returns the number of occurrences of `target` in the `word`.  Assume all inputs are given in lowercase.
-
-**Hint:** Check `N` letters at a time, where `N` is the length of the target.  Get a substring that is `target.length()` long, and see if it is equal to the `target`.  If it is, then count it.
-
-**Hint:** See the slides for an example of checking two letters at at time.  How would you check three letters at a time?  Generalize this to check `N` letters at a time.
-
-### Sample run
-```md
-Input word:
-gagagigo the risen
-
-Input target:
-ga
-
-The substring ga appears 2 times
+**Sample run:**
+```
+printNTimes("code", 3) results in
+cccooodddeee
 ```
 
-# Problem 2 - CountProperContains
-Write a program that takes in two Strings, `word` and `target`, and returns the number of times the `target` is *properly contained* within the `word`.
+# Problem 2 - PrintNums
 
-A substring is said to be *properly contained* if it meets both of the following conditions:
-* The substring is the beginning of the String or is immediately preceded by a space (i.e., has a space before the substring)
-* The substring is the end of the String or is immediately followed by a space (i.e., there's a space after the substring)
+Write code which prints every number from 10 to 1 a number of times equal to the number itself (e.g. ten 10’s, nine 9's...). Every individual number printed should be separated by a space, and there should be a new line each time the number changes. You should use nested loops to produce your output (it will result in far less code).
 
-## Examples of substrings being *properly contained*:
-* `"bada"` is properly contained in `"bada boom baby"`
-* `"boom"` is properly contained in `"bada boom baby"`
-* `"oom"` is properly contained in `"badab oom baby"`
-
-## Non-examples of substrings being *properly contained*:
-* `"bada"` is NOT properly contained in `"badaboom baby"` (there needs to be a space after the `"bada"`)
-* `"dab"` is NOT properly contained in `"badaboom baby"`
-* `"ada"` is NOT properly contained in `"badaboom baby"`
-* `"schlay"` is NOT properly contained in `"badaboom baby"`
-
-Sample Run
-```md
-Input word:
-bada the badaboom the bobadabo baby
-
-Input Target:
-bada
-
-The substring bada is properly contained 1 times
+**Partial sample run:**
+```
+10 10 10 10 10 10 10 10 10 10
+9 9 9 9 9 9 9 9 9
+8 8 8 8 8 8 8 8
+........
 ```
 
-# Problem 3 - DeleteSub
-Write a program which takes in two Strings `word` and `target` and removes all occurrences of `target` from `word`.  Return this new `String` with all instances of the `target` removed.  Assume all inputs are in lowercase.
+# Problem 3 - UprightNumberTriangle
+In this program, ask the user to enter a number.
+Print an upright number tree from 1 to the number the user inputted.
 
-One possible solution goes like this:
-1. While the `target` can still be found in the `word` (use `indexOf()`)
-2. Remove the `target` from the word (by combining a substring of everything before the `target` with everything after the `target`)
-
-Sample run
+**Sample Run**
 ```
-Input word:
-gagagigo the giga Risen
+Input a number: 5
+1 
+1 2 
+1 2 3 
+1 2 3 4 
+1 2 3 4 5 
+```
 
-Input target:
-gig
+# Problem 4 - StarTree
+In this program, you need to make an upside-down tree that contains stars *. After all, in computer science, trees have the root at the top and leaves at the bottom!
 
-New String:
-gagao the a risen
+Your output should look like:
+```
+* * * * * * * * * 
+ * * * * * * * * 
+  * * * * * * * 
+   * * * * * * 
+    * * * * * 
+     * * * * 
+      * * * 
+       * * 
+        * 
+```
+**Hint:** You will need to create a variable that controls how far the * is from edge of the console. That variable should change size each iteration through the outer loop!
+
+**Challenge:** Modify your program so that it asks for the height of your tree
+and prints a tree of that height.
+
+# Problem 5 - MultTable
+In this program, you need to make a multiplication table. Your output should look like:
+```
+1  2  3  4  5  6  7  8  9  10  
+2  4  6  8  10  12  14  16  18  20  
+3  6  9  12  15  18  21  24  27  30  
+4  8  12  16  20  24  28  32  36  40  
+5  10  15  20  25  30  35  40  45  50  
+6  12  18  24  30  36  42  48  54  60  
+7  14  21  28  35  42  49  56  63  70  
+8  16  24  32  40  48  56  64  72  80  
+9  18  27  36  45  54  63  72  81  90  
+10  20  30  40  50  60  70  80  90  100
 ```
 
 ## Sample Solutions
 ```java
-public static int countSub(String word, String target)
+public static void printNTimes(String word, int N)
 {
-  int count = 0;
-
-  // This stops at the Nth to last letter, where N is the
-  // length of the target.  As in, I am checking N letters
-  // at a time.
-  for (int i = 0; i < word.length() - (target.length() - 1); i++)
+  for (int curr_index = 0; curr_index < word.length(); curr_index++)
   {
-    String sub = word.substring(i, i + target.length());
-    if (sub.equals(target))
+    for (int curr_print = 0; curr_print < N; curr_print++)
     {
-      count++;
+      String letter = word.substring(curr_index, curr_index+1);
+      System.out.print(letter);
     }
   }
-  return count;
 }
 
-public static int countProperContains(String word, String target)
+public static void printNums()
 {
-  int count = 0;
-  for (int i = 0; i < word.length() - (target.length() - 1); i++)
+  for (int curr_num = 10; curr_num > 0; curr_num--)
   {
-    String sub = word.substring(i, i+target.length());
-    if (sub.equals(target))
+    for (int print_num = 0; print_num < curr_num; print_num++)
     {
-      int beginOfTarget = i;
-      int endOfTarget = i+target.length();
-
-      // Note: short circuiting prevents me from checking out of bounds when I attempt
-      // to check for the letter at (begin-1, begin) and at (end, end+1)
-      boolean beginOrSpaceBefore = (beginOfTarget == 0 || word.substring(beginOfTarget-1, beginOfTarget).equals(" "));
-      boolean endOrSpaceAfter = (endOfTarget == word.length() || word.substring(endOfTarget, endOfTarget+1).equals(" "));
-      if (beginOrSpaceBefore && endOrSpaceAfter)
-      {
-        count++;
-      }
+      System.out.print(curr_num + " ");
     }
+    System.out.println();
   }
-  return count;
 }
 
-public static String deleteSub(String word, String target)
+public static void uprightNumberTriangle(int N)
 {
-  // As long as the target is found in the word, we remove it
-  while (word.indexOf(target) != -1)
+  for (int row = 1; row <= N; row++)
   {
-    // Combine everything before the target with everything after target
-    word = word.substring(0, indexOfTarget) + word.substring(indexOfTarget + target.length());
+    for (int curr_num = 1; curr_num <= row; curr_num++)
+    {
+      System.out.print(curr_num + " ");
+    }
+    System.out.println();
   }
-  return word;
 }
+
+public static void starTree()
+{
+  for (int row = 0; row < 9; row++)
+  {
+    for (int space_count = 0; space_count < row; space_count++)
+    {
+      System.out.print(" ");
+    }
+
+    for (int star_count = row; star_count < 9; star_count++)
+    {
+      System.out.print("* ");
+    }
+    System.out.println();
+  }
+}
+
 ```
